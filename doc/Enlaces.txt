@@ -1,0 +1,3 @@
+CRISP-DM:
+https://www.iic.uam.es/innovacion/metodologia-crisp-dm-ciencia-de-datos/
+

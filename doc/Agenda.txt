@@ -1,0 +1,5 @@
+			-16/12-
+Creado repositorio 
+añadida base de datos: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VTBURQ
+modificada (solo 2 ultimas columnas) y añadida base de datos: https://www.kaggle.com/datasets/danielfesalbon/gosu-ai-english-dota-chat
+
