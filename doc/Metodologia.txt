@@ -1,0 +1,12 @@
+Entendimiento del negocio:
+	
+Comprensión de los datos:
+
+Preparación de los datos:
+
+Modelado:
+
+Evaluación:
+
+Despliegue:
+

@@ -1,0 +1,11 @@
+Toxicity detection in multiplayer online games:
+https://ieeexplore.ieee.org/abstract/document/7382991?casa_token=4lsdryES4j8AAAAA:Nfpf26Ha-8EuZbch001ymsW_QJqzymrWo8-IbPMBUnDyMcYLzMszZ1HNmJ230asAop7u0qT41A
+
+Studying toxic behavior influence and player chat in an online video game:
+https://dl.acm.org/doi/abs/10.1145/3106426.3106452?casa_token=yY18xdbLdpEAAAAA:pUmz5DdkGWipvDlhIctl21DAvYn50UOxh5Kd9h2bL4HYQDULIVE5GcQehBE0QwrMusBDOf6FVn3fPA
+
+Sentiment analysis of player chat messaging in the video game StarCraft 2: Extending a lexicon-based model:
+https://www.sciencedirect.com/science/article/abs/pii/S0950705117304240?casa_token=3HTZeF8dDO0AAAAA:rxKxFSfEIwp3oLLszvDz_HpP1_tRvx7WGff3igF8WiJwaThJh-1BGC9r0f5Vr4uoBi2oiuANkuw
+
+Toxic Behaviors in Esports Games: Player Perceptions and Coping Strategies:
+https://dl.acm.org/doi/abs/10.1145/3270316.3271545?casa_token=IdERh1onqeAAAAAA:eH_uZ5mf_Dt5KAjfcSO5qffi2UnqPzb7Qm7SrZGl8f1UrtIwQffo1FalZsOn-AXJGu7fRsi5KnNNzQ

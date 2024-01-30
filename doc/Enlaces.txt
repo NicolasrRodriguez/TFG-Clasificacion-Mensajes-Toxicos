@@ -1,3 +1,9 @@
 CRISP-DM:
 https://www.iic.uam.es/innovacion/metodologia-crisp-dm-ciencia-de-datos/
+https://repositorio.uam.es/bitstream/handle/10486/680056/nishizaki_fernandes_rafael_tfg.pdf?sequence=1
 
+Bad-words:
+https://www.cs.cmu.edu/~biglou/resources/bad-words.txt
+
+Tutorial Bert:
+https://youtu.be/iPrwWtVl0LM?si=AJEg4WF-eq6lzkyg
