@@ -7,3 +7,7 @@ modificada (solo 2 ultimas columnas) y añadida base de datos: https://www.kaggl
 			-30/01-
 Recopilación de trabajos y enlaces de interes
 
+
+			-25/03-
+
+Entrenado modelo simple siguiendo la guia de Tensorflow, resultados pesimos, esperable.

@@ -1,0 +1,54 @@
+Saco de palabras:
+	-Se tokenza el texto -> Las palabras se combierten a su forma base (Libreria NLTK)
+	-Calcular las frecuencias de las palabras(Libreria collections)
+	-Se puede crear un vector con el texto-> cada palabra es una posición y us frecuencia es el valor
+	-Solo tiene en cuenta las frecuencias por lo que es una aproximación simple pero no muy buena
+
+TF-IDF:
+	-Term-Frecuency: Frecuencia de la palabra en el documento(veces que aparece en el documento/palabras totales del documento)
+	-Inverse Document Frequency: Dice cuanta información aporta la palabra(log(cantidad de documentos / documentos que contienen el termino))
+				     cuanto mas común es la palabra, IDF tiende a 0, menos relevante es
+	-Esto genera vectores donde las palabras mas comunes, como los adverbios, tienen pesos pequeños. aún así no tiene en cuenta el significado de las palabras
+	-Genera vectores muy grandes y con pesos mal distribuidos(muchos cercanos a cero)
+
+Word2Vec:
+	-Dos aproximaciones:
+		-Sacos de palabras continuos: 
+			-Usan las palabras adyacentes para predecir la esperada
+			
+		-Skip-grams: 
+			-Usan la palabra para predecir el contexto
+	Esto permite entrenar un Codificador y un decodificador
+
+Transformers and Sentence Embedings:
+	-Los Transformers permiten usar el mismo núcleo para diferentes casos de uso, dando lugar a modelos preentrenados como BERT
+	-BERT funciona en base a tokens, de forma similar a Word2Vec
+
+Proximidad de Vectores:
+	-Para tareas de NLP es mejor usar la similaridad de cosenos:
+		-Devuelve un valor entre -1 y 1, por lo que es mas facil de interpretar
+		-Es mas effectiva que la euclidea(usa productos escalares,no raices cuadradas)
+		-Es menos afectada por la "maldición de las dimensiones"(cuantas mas dimensiones, las distancias entre los vectores van a ser mas pequeñas)
+Visualización:
+	Los vectores tiene muchas dimensiones, para poder verlos hay que conseguir una forma de reducirlas a 2:
+		-PCA: 
+			-Se convierte el vector a un array de 2 dimensiones
+			-Se inicia el modelo con dos componentes y se entrena con todos los datos
+			-Esto devuelve una matriz que si podemos visualizar
+		-t-SNE:
+			-Similar a PCA pero en este caso el algoritmo no es lineal
+		-Codigos de Barras:
+			-Usa algunos de los vectores como ejemplos para poder entenderlos
+			-Si los vectores tienen muchas dimensiones no es muy buena
+Aplicaiones practicas:
+	
+	-Clustering:
+		-Buena aproximación pero los temas similares acaban todos en el mismo cluster
+	
+	-Clasificación:
+		-Resultado similar al clustering, en esta caso el aprendizaje es supervisado, se etiquetan los vectores con el tema al que se refieren
+	
+	-Encontrar ruido:
+		-Pueden usarse los vectores para encontrar ruido
+
+	
