@@ -1,4 +1,4 @@
-import pandas as pd
+
 
 import tensorflow as tf
 import pandas as pd
@@ -8,11 +8,11 @@ batch_size = 32
 seed = 42
 
 # Cargar el archivo CSV usando pandas
-dataframe = pd.read_csv('GOSU-dataset.csv')
+dataframe = pd.read_csv('Datasets/Labeled Dota 2 Player Messages Dataset.csv')
 
 # Separar características y etiquetas
 X = dataframe['text'].values
-y = dataframe['target'].values
+y = dataframe['cls'].values
 
 # Obtener el tamaño del conjunto de datos
 dataset_size = len(X)
