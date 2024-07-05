@@ -8,7 +8,7 @@ batch_size = 32
 seed = 42
 
 # Cargar el archivo CSV usando pandas
-dataframe = pd.read_csv('Datasets/Labeled Dota 2 Player Messages Dataset.csv')
+dataframe = pd.read_csv('Data/Labeled Dota 2 Player Messages Dataset.csv')
 
 # Separar características y etiquetas
 X = dataframe['text'].values
