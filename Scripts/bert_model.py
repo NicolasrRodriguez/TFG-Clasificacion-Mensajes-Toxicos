@@ -1,6 +1,5 @@
 
-bert_model_name = 'small_bert/bert_en_uncased_L-4_H-512_A-8' 
-
+bert_model_name = 'bert_en_cased_L-12_H-768_A-12'
 #bert_model_name = 'bert_en_uncased_L-12_H-768_A-12'
 
 map_name_to_handle = {

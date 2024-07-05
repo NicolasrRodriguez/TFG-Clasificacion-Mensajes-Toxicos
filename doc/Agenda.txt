@@ -1,3 +1,5 @@
+
+Horas: 30	
 			-16/12-
 Creado repositorio 
 añadida base de datos: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VTBURQ
@@ -11,3 +13,7 @@ Recopilación de trabajos y enlaces de interes
 			-25/03-
 
 Entrenado modelo simple siguiendo la guia de Tensorflow, resultados pesimos, esperable.
+
+
+			-05/07-
+16:15 - 19:10
