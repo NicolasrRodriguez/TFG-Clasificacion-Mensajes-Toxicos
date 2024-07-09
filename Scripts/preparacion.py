@@ -13,20 +13,31 @@ import numpy as np
 import matplotlib.pyplot as plt
 import bert_model as bm
 
-import nltk  
+dataframe = pd.read_csv('Data/pooled_outputs.csv')
 
-nltk.download('stopwords')
+dataframe_ = dataframe.drop(columns=['class'])
 
-from nltk.corpus import stopwords
 
-from nltk.tokenize import word_tokenize
+print(dataframe_.describe())
 
-stop_words = set(stopwords.words('english'))
 
-dataframe = pd.read_csv('Data/Labeled Dota 2 Player Messages Dataset.csv')
+from sklearn.preprocessing import StandardScaler
 
-for mensaje in dataframe['text']:
-    word_tokens = word_tokenize(mensaje)
-    filtered_sentence = [w for w in word_tokens if not w.lower() in stop_words]
-    print(word_tokens)
-    print(filtered_sentence)
+scaler = StandardScaler()
+standardized_data = scaler.fit_transform(dataframe_)
+
+print(standardized_data)
+
+standardized_df = pd.DataFrame(standardized_data, columns=dataframe_.columns)
+
+standardized_df['class'] = dataframe['class'].values
+
+print(standardized_df.describe())
+
+
+standardized_df.to_csv('Data/standar_datapack.csv', index=False)
+
+
+
+
+
