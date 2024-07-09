@@ -7,3 +7,7 @@ https://www.cs.cmu.edu/~biglou/resources/bad-words.txt
 
 Tutorial Bert:
 https://youtu.be/iPrwWtVl0LM?si=AJEg4WF-eq6lzkyg
+
+
+PCA:
+https://www.codementor.io/@mgalarny/pca-using-python-scikit-learn-pandas-ensfh3huz
