@@ -13,6 +13,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import bert_model as bm
 
+import conjuntosEVT
+
 dataframe = pd.read_csv('Data/pooled_outputs.csv')
 
 dataframe_ = dataframe.drop(columns=['class'])
