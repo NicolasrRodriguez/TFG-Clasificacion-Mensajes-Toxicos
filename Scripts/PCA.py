@@ -24,10 +24,3 @@ pC_test = pca.transform(X_test)
 
 print(np.array(pC_train).shape)
 print(np.array(pC_test).shape)
-
-class_0 = pC_train[conjuntosEVT.train_c == 0]
-class_1 = pC_train[conjuntosEVT.train_c == 1]
-plt.scatter(class_0, np.zeros_like(class_0), color='blue', label='Clase 0')
-plt.scatter(class_1, np.zeros_like(class_1), color='red', label='Clase 1')
-
-plt.show()

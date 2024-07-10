@@ -71,6 +71,16 @@ print(f'Pooled Outputs Values:{bert_results["pooled_output"][0, :12]}')
 print(f'Sequence Outputs Shape:{bert_results["sequence_output"].shape}')
 print(f'Sequence Outputs Values:{bert_results["sequence_output"][0, :12]}')
 
+pooled_outputs = bert_results['pooled_output'].numpy()
+sequence_outputs = bert_results['sequence_output'].numpy()
+
+np.save('pooled_outputs.npy', pooled_outputs)
+np.save('sequence_outputs.npy', sequence_outputs)
+
+pooled_outputs_df = pd.DataFrame(pooled_outputs)
+pooled_outputs_df['class'] = dataframe['cls'].values
+pooled_outputs_df.to_csv('pooled_outputs.csv', index=False)
+
 """
 def preprocesado(mensaje):
     tokens = bert_preprocess_model.tokenize(tf.constant(mensaje))

@@ -25,4 +25,4 @@ Entrenado modelo simple siguiendo la guia de Tensorflow, resultados pesimos, esp
 16:28 - 18:45
 
 			-10/07-
-11:40 - 12:30 | 16:26 
+11:40 - 12:30 | 16:26 - 19:33

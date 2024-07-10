@@ -23,6 +23,7 @@ LDA_test = lda.transform(X_test)
 
 print(np.array(LDA_train).shape)
 print(np.array(LDA_test).shape)
+print(lda.explained_variance_ratio_)
 
 plt.figure(figsize=(10, 6))
 
