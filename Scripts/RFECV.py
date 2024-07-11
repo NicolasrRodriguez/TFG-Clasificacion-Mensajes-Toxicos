@@ -7,10 +7,13 @@ from sklearn.feature_selection import RFECV
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import StratifiedKFold
+import numpy as np
 
 
 scaler = StandardScaler()
 X_train = scaler.fit_transform(conjuntosEVT.train_f)
+x = pd.DataFrame(X_train, columns=[f"feature_{i}" for i in range(X_train.shape[1])])
+
 
 clf = LogisticRegression(max_iter=1000, random_state=42)
 
@@ -20,13 +23,21 @@ rfecv = RFECV(estimator=clf, step=1, cv=cv, scoring='accuracy', min_features_to_
 
 rfecv.fit(X_train, conjuntosEVT.train_c)
 
+
 print(f"Número óptimo de características : {rfecv.n_features_}")
 
+resp = x.columns[rfecv.get_support()] 
+
+with open('selected_features.txt', 'w') as f:
+    f.write("Número óptimo de características : {rfecv.n_features_}")
+    f.write("Características seleccionadas:\n")
+    for feature in resp:
+        f.write("{}\n".format(feature))
 
 
 cv_results = pd.DataFrame(rfecv.cv_results_)
-print(cv_results.describe())
-print(cv_results.columns)
+
+
 
 plt.figure()
 plt.xlabel("Number of features selected")
