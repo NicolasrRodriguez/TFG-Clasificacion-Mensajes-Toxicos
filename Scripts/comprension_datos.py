@@ -3,7 +3,10 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from collections import Counter as cnt
 import re
-from operator import itemgetter
+from sklearn.feature_extraction.text import TfidfVectorizer as tfi
+import numpy as np
+
+#-----------------Funciones----------------------
 
 def preparar_mensajes(mensaje):
 
@@ -23,10 +26,16 @@ def calcular_diversidad_lexica(mensaje):
     ld = num_tipos / (num_tokens ** 0.5)
     return ttr, ld
 
+#-----------------Carga del dataset--------------
 
-dataframe = pd.read_csv('Datasets/Labeled Dota 2 Player Messages Dataset.csv')
+dataframe = pd.read_csv('Data/Labeled Dota 2 Player Messages Dataset.csv')
+
+datapack = pd.read_csv('Data/pooled_outputs.csv')
+
+caracteristicas = datapack.drop(columns=['class'])
 
 
+#--------------------Longitud--------------------
 dataframe['numero_caracteres'] = dataframe['text'].apply(len)
 
 dataframe['numero_palabras'] = dataframe['text'].apply(lambda x: len(x.split()))
@@ -35,6 +44,7 @@ longitud_media_caracteres = dataframe['numero_caracteres'].mean()
 longitud_media_palabras = dataframe['numero_palabras'].mean()
 
 mensaje_mas_largo = dataframe['numero_palabras'].max()
+
 
 mensaje_mas_corto = dataframe['numero_palabras'].min()
 
@@ -51,6 +61,8 @@ print(f'Longitud media en palabras: {longitud_media_palabras}')
 print(f'Mensasje mas largo: {mensaje_mas_largo}')
 print(f'Mensasje mas corto: {mensaje_mas_corto}')
 
+
+#-----------------Palabras comunes---------------
 bloque_mensajes = ' '.join(dataframe['text'])
 
 palabras = preparar_mensajes(bloque_mensajes)
@@ -71,6 +83,8 @@ plt.xlabel('Frecuencia')
 plt.ylabel('Palabra')
 #plt.show()
 
+#-----------------Diversidad lexica--------------
+
 dataframe['TTR'], dataframe['LD'] = zip(*dataframe['text'].apply(calcular_diversidad_lexica))
 
 print(dataframe[['cls', 'TTR', 'LD']].groupby('cls').mean())
@@ -85,6 +99,44 @@ sns.boxplot(x='cls', y='LD', data=dataframe)
 plt.title('Índice de Diversidad Léxica (LD) por Clase')
 #plt.show()
 
+#-----------------Palabras clave---------------
+
+vectorizador = tfi()
+
+tfidf_matrix = vectorizador.fit_transform(dataframe['text'])
+
+tfidf_array = tfidf_matrix.toarray()
+
+palabras = vectorizador.get_feature_names_out()
+
+"""
+for i, mensaje_tfidf in enumerate(tfidf_array):
+    print(f"\nMensaje {i + 1} (Clase {dataframe['cls']}):")
+    for palabra, tfidf in zip(palabras, mensaje_tfidf):
+        if tfidf > 0:
+            print(f"{palabra}: {tfidf:.4f}")
+"""
+
+df_tfidf = pd.DataFrame(tfidf_array, columns=palabras)
+
+df_tfidf['Clase'] = dataframe['cls']
+
+promedios_clase1 = df_tfidf[df_tfidf['Clase'] == 0].mean().drop('Clase')
+promedios_clase2 = df_tfidf[df_tfidf['Clase'] == 1].mean().drop('Clase')
+
+palabras_clave_clase1 = promedios_clase1.sort_values(ascending=False).head(20)
+palabras_clave_clase2 = promedios_clase2.sort_values(ascending=False).head(20)
+
+
+with open('palabras_clave.txt', 'w') as archivo:
+    archivo.write("Palabras clave para en mensajes negativos:\n")
+    archivo.write(str(palabras_clave_clase1))
+    archivo.write("\n")
+    archivo.write("Palabras clave para en mensajes positivos:\n")
+    archivo.write(str(palabras_clave_clase2))
+
+"""
+
 frecuencias_por_clase = {}
 
 clases = dataframe['cls'].unique()
@@ -95,6 +147,7 @@ for clase in clases:
     for texto in textos_clase:
         todas_palabras.extend(preparar_mensajes(texto))
     frecuencias_por_clase[clase] = cnt(todas_palabras)
+
 
 palabras_clave_por_clase = {}
 
@@ -111,9 +164,9 @@ with open('palabras_clave.txt', 'w') as archivo:
         archivo.write("Palabras clave para la clase " + str(clase) + ":\n")
         archivo.write(str(sorted(palabras_clave.items(), key=itemgetter(1), reverse=True)) + "\n")
         archivo.write("\n")
+"""
 
-
-
+#----------------------Nulos---------------------
 
 plt.figure(figsize=(10,6))
 sns.heatmap(dataframe.isnull(), cbar=False, cmap='coolwarm')
@@ -126,3 +179,25 @@ else:
 
 
 #plt.show()
+
+#-----------------Correlaciones 2 a 2-----------------
+
+correlation_matrix = datapack.corr()
+
+print(correlation_matrix)
+
+f, ax = plt.subplots(figsize=(15, 12))
+
+mask = np.triu(np.ones_like(correlation_matrix, dtype=bool))
+
+sns.heatmap(correlation_matrix, annot=True, mask=mask ,cmap="viridis")
+
+
+# Mostrar el mapa de calor
+plt.show()
+
+correlations_with_target = datapack.corr()['class'].drop('class')
+
+# Mostrar las correlaciones
+print("Correlaciones con la característica respuesta (class):")
+print(correlations_with_target)
