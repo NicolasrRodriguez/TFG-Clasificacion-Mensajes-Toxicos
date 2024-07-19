@@ -76,7 +76,18 @@ rfecv.fit(X_train, datapack['class'].values)
 
 print(f"Número óptimo de características : {rfecv.n_features_}")
 
-resp = caracteristicas.columns[rfecv.get_support()] 
+x = pd.DataFrame(X_train, columns=[f"{i}" for i in range(X_train.shape[1])])
+
+resp = x.columns[rfecv.get_support()] 
+
+print(np.array(resp))
+
+
+df_selected_columns = x[np.array(resp)] 
+
+df_all = pd.concat([df_selected_columns,datapack['class']] , axis= 1)
+
+df_all.to_csv('df_all.csv', index=False)
 
 with open('selected_features.txt', 'w') as f:
     f.write("Número óptimo de características : {rfecv.n_features_}")
