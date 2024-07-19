@@ -6,6 +6,8 @@ import re
 from sklearn.feature_extraction.text import TfidfVectorizer as tfi
 import numpy as np
 
+from pycaret.classification import setup, compare_models  
+
 #-----------------Funciones----------------------
 
 def preparar_mensajes(mensaje):
@@ -184,20 +186,30 @@ else:
 
 correlation_matrix = datapack.corr()
 
-print(correlation_matrix)
+
+umbral = 0.8
+
+mask = (correlation_matrix.abs() >= umbral) & (correlation_matrix != 1.0)
+
+# Filtrar y mostrar las correlaciones que superen el umbral
+high_correlations = correlation_matrix[mask]
+
+
 
 f, ax = plt.subplots(figsize=(15, 12))
 
-mask = np.triu(np.ones_like(correlation_matrix, dtype=bool))
+mask = np.triu(np.ones_like(high_correlations, dtype=bool))
 
-sns.heatmap(correlation_matrix, annot=True, mask=mask ,cmap="viridis")
+sns.heatmap(correlation_matrix)
 
 
 # Mostrar el mapa de calor
 plt.show()
 
+"""
 correlations_with_target = datapack.corr()['class'].drop('class')
 
 # Mostrar las correlaciones
 print("Correlaciones con la característica respuesta (class):")
 print(correlations_with_target)
+"""
