@@ -1,34 +1,60 @@
 import pandas as pd 
-from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split, StratifiedKFold
 
-scaler = StandardScaler()
+import numpy as np
 
-from multicolinearidad import atributos_redundantes
 
-datapack = pd.read_csv('Data/pooled_outputs.csv')
+datapack = pd.read_csv('Data/finaldpck.csv')
 
 caracteristicas = datapack.drop(columns=['class'])
 
-caracteristicas = caracteristicas.drop(labels = atributos_redundantes ,axis= 1)
+clases = datapack['class']
 
-X_train = scaler.fit_transform(caracteristicas)
+folds = 5
 
-clase = datapack['class']
+cv = StratifiedKFold(n_splits=5, shuffle=True, random_state= 42)
 
-X_train['class'] = datapack['class'].values
+splits = cv.split(caracteristicas,clases)
 
+for index, (train_val_index, test_index) in enumerate(splits):
+    print(f"Fold {index} : train_val | test")
 
-cols = [ 0, 1, 2, 3, 4, 5, 8, 9, 14, 15, 19, 20, 22, 23, 24, 28, 30, 34, 35, 37, 38, 40,
-    42, 44, 45, 46, 48, 49, 59, 60, 61, 62, 63, 64, 65, 68, 69, 71, 73, 74, 78, 83,
-    88, 89, 96, 97, 109, 114, 118, 120, 129, 134, 141, 143, 150, 151, 162, 170, 171,
-    172, 174, 176, 178, 181, 182, 187, 190, 191, 193, 195, 203, 204, 205, 213, 217,
-    222, 228, 237, 242, 247, 262, 271, 272, 286, 294, 296, 301, 304, 311, 312, 318,
-    325, 330, 333, 337, 369, 387, 389, 393, 394, 397, 398, 400, 403, 405, 407, 408,
-    409, 416, 432, 435, 436, 446, 448, 449, 456, 469, 475, 477, 490, 492, 494, 496,
-    499, 502, 503, 506, 522, 524, 530, 536, 550, 551, 555, 575, 577, 581, 591, 593,
-    604, 608, 611, 613, 615, 621, 626, 631, 634, 637, 640, 644, 657, 667, 668, 685,
-    688, 689, 696, 697, 700, 701, 704, 711, 713, 716, 727, 739, 758, 764]
+    x_train_val_fold, x_test_fold = caracteristicas.iloc[train_val_index], caracteristicas.iloc[test_index]
 
-#caracteristicas_ =  caracteristicas.drop( columns=  cols, axis=0 )
+    y_train_val_fold, y_test_fold = clases.iloc[train_val_index], clases.iloc[test_index]
 
-#print(caracteristicas_.describe())
+    #Guardo test en el directorio
+
+    path = f"Data/CV/Fold-{index+1}/test.csv"
+
+    x_test_fold['class'] = y_test_fold
+
+    x_test_fold.to_csv( path , index = False )
+
+    splits = cv.split(x_train_val_fold,y_train_val_fold)
+
+    for index, (train_index, val_index) in enumerate(splits):
+        print(f"Fold {index} : train | val")
+
+        path = f"Data/CV/Fold-{index+1}/Train-Val"
+
+        x_train_fold, x_val_fold = caracteristicas.iloc[train_index], caracteristicas.iloc[val_index]
+
+        y_train_fold, y_val_fold = clases.iloc[train_index], clases.iloc[val_index]
+
+"""
+for train_val_index, test_index in splits:
+
+    x_train_val_fold, x_test_fold = caracteristicas[train_val_index], caracteristicas[test_index]
+
+    y_train_val_fold, y_test_fold = clases[train_val_index], clases[test_index]
+
+    cv = StratifiedKFold(1)
+    splits = cv.split(x_train_val_fold,y_train_val_fold)
+
+    for train_index, val_index in splits:
+
+        x_train_fold, x_val_fold = caracteristicas[train_index], caracteristicas[val_index]
+
+        y_train_fold, y_val_fold = clases[train_index], clases[val_index]
+"""
