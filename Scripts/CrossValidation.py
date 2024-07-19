@@ -31,16 +31,25 @@ for index, (train_val_index, test_index) in enumerate(splits):
 
     x_test_fold.to_csv( path , index = False )
 
-    splits = cv.split(x_train_val_fold,y_train_val_fold)
+    splits_ = cv.split(x_train_val_fold,y_train_val_fold)
 
-    for index, (train_index, val_index) in enumerate(splits):
-        print(f"Fold {index} : train | val")
 
-        path = f"Data/CV/Fold-{index+1}/Train-Val"
+    for index_, (train_index, val_index) in enumerate(splits_):
+        print(f"Fold {index_} : train | val")
+
+        pathtrain = f"Data/CV/Fold-{index+1}/Train-Val/Fold-{index_+1}/train.csv"
+
+        pathval = f"Data/CV/Fold-{index+1}/Train-Val/Fold-{index_+1}/val.csv"
 
         x_train_fold, x_val_fold = caracteristicas.iloc[train_index], caracteristicas.iloc[val_index]
 
         y_train_fold, y_val_fold = clases.iloc[train_index], clases.iloc[val_index]
+
+        x_train_fold['class'] = y_train_fold
+        x_val_fold['class'] = y_val_fold
+
+        x_train_fold.to_csv(pathtrain, index = False)
+        x_val_fold.to_csv(pathval, index = False)
 
 """
 for train_val_index, test_index in splits:
