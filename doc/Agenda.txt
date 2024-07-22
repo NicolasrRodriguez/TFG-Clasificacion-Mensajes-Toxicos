@@ -40,7 +40,10 @@ Entrenado modelo simple siguiendo la guia de Tensorflow, resultados pesimos, esp
 15:20 - 18:00
 
 			-19/07-
-11:20 - 12:40 | 15:20
+11:20 - 12:40 | 15:20 - 18:30
+
+			-22/07-
+11:30 - 12:40 | 
 
 eliminar caracteristicas redundantes, definir umbral 
 
