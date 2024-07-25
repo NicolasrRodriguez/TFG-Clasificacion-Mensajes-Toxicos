@@ -77,7 +77,7 @@ classifier_model.compile(
 print(f'Training model with {bm.tfhub_handle_encoder}')
 history = classifier_model.fit(x=cd.train_dataset,
                                validation_data=cd.val_dataset,
-                               epochs=epochs)
+                               epochs=epochs,)
 
 loss, accuracy = classifier_model.evaluate(cd.test_dataset)
 

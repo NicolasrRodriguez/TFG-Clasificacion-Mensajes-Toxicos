@@ -45,6 +45,12 @@ Entrenado modelo simple siguiendo la guia de Tensorflow, resultados pesimos, esp
 			-22/07-
 11:30 - 12:40 | 
 
+			-23/07-
+11:30 - 12:30 | 16:10 - 18:30
+
+			-24/07-
+11:20 - 12:40 | 16:30 - 18:30
+
 eliminar caracteristicas redundantes, definir umbral 
 
 validacion cruzada en test también, bucles antes de entrenar
