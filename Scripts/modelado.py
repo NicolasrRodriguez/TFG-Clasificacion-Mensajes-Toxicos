@@ -8,7 +8,7 @@ import tensorflow_text as text
 import pandas as pd
 import numpy as np
 
-from official.nlp import optimization #addons da un warning
+#from official.nlp import optimization #addons da un warning
 
 import matplotlib.pyplot as plt
 import bert_model as bm

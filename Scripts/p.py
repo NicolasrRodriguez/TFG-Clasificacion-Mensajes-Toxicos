@@ -6,13 +6,14 @@ import numpy as np
 from sklearn.metrics import accuracy_score
 
 
-
+#tensorflow
 def build_classifier_model():
   input = tf.keras.layers.Input(shape=(169,), dtype=tf.float64, name='Entrada')
   net = tf.keras.layers.Dropout(0.1)(input)
-  net = tf.keras.layers.Dense(2, activation=None, name='classifier')(net)
+  net = tf.keras.layers.Dense(1, activation='sigmoid', name='classifier')(net)
   return tf.keras.Model(input, net)
 
+#gpt
 def build_classifier_model_():
     input = tf.keras.layers.Input(shape=(169,), dtype=tf.float64, name='Entrada')
     net = tf.keras.layers.Dense(64, activation='relu')(input)
@@ -27,9 +28,35 @@ def build_classifier_model_():
     net = tf.keras.layers.Dense(1, activation='sigmoid')(net)
     return tf.keras.Model(input, net)
 
+#kagle
+def build_model(max_len = 169):
+    input = tf.keras.layers.Input(shape=(max_len,), dtype=tf.float64, name='Entrada')
+    lay = tf.keras.layers.Dense(64, activation='relu')(input)
+    lay = tf.keras.layers.Dropout(0.2)(lay)
+    lay = tf.keras.layers.Dense(32, activation='relu')(lay)
+    lay = tf.keras.layers.Dropout(0.2)(lay)
+    out = tf.keras.layers.Dense(1, activation='sigmoid')(lay)
+    model = tf.keras.Model(inputs = input, outputs = out)
+    return model
 
-#def build_model( capas , ):
-
+def fine_tune(model, X_train, x_val, y_train, y_val):
+    max_epochs = 60
+    batch_size = 32
+    opt = tf.keras.optimizers.Adam(learning_rate=1e-3)
+    loss = tf.keras.losses.BinaryCrossentropy()
+    best_weights_file = "weights.h5"
+    m_ckpt = tf.keras.callbacks.ModelCheckpoint(best_weights_file, monitor='val_accuracy', mode='max', verbose=2,
+                             save_weights_only=True, save_best_only=True)
+    model.compile(loss=loss, optimizer=opt, metrics=[
+                                                     'accuracy'])
+    model.fit(
+        X_train, y_train,
+        validation_data=(x_val, y_val),
+        epochs=max_epochs,
+        batch_size=batch_size,
+        callbacks=[m_ckpt],
+        verbose=2
+    )
 
 
 def cross_val_nested(X, y, outer_folds=5, inner_folds=5):
@@ -52,11 +79,14 @@ def cross_val_nested(X, y, outer_folds=5, inner_folds=5):
             y_inner_train, y_inner_val = y_train.iloc[inner_train_index], y_train.iloc[inner_val_index]
             
             # Build and compile the model
-            model = build_classifier_model_()
-            model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+            model = build_classifier_model()
+            #model.compile(loss='binary_crossentropy', metrics=['accuracy'])
+
+
+            fine_tune(model,X_inner_train,X_inner_val,y_inner_train,y_inner_val)
             
             # Train the model
-            model.fit(X_inner_train, y_inner_train, epochs=50)
+            #model.fit(X_inner_train, y_inner_train, epochs=10)
             
             # Evaluate on validation set
             y_val_pred = model.predict(X_inner_val)

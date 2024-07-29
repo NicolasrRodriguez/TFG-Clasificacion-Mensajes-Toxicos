@@ -6,7 +6,7 @@ import re
 from sklearn.feature_extraction.text import TfidfVectorizer as tfi
 import numpy as np
 
-from pycaret.classification import setup, compare_models  
+#from pycaret.classification import setup, compare_models  
 
 #-----------------Funciones----------------------
 
@@ -187,9 +187,13 @@ else:
 correlation_matrix = datapack.corr()
 
 
-umbral = 0.8
+umbral = 0.9
+
+correlation_matrix_filtered = correlation_matrix[(correlation_matrix > umbral) | (correlation_matrix < -umbral)]
 
 mask = (correlation_matrix.abs() >= umbral) & (correlation_matrix != 1.0)
+
+
 
 # Filtrar y mostrar las correlaciones que superen el umbral
 high_correlations = correlation_matrix[mask]
@@ -198,9 +202,11 @@ high_correlations = correlation_matrix[mask]
 
 f, ax = plt.subplots(figsize=(15, 12))
 
-mask = np.triu(np.ones_like(high_correlations, dtype=bool))
+mask = np.triu(np.ones_like(correlation_matrix_filtered, dtype=bool))
 
-sns.heatmap(correlation_matrix)
+sns.heatmap(correlation_matrix_filtered, mask=mask, annot=True, cmap='coolwarm', vmin=-1, vmax=1, center=0)
+
+#sns.heatmap(high_correlations)
 
 
 # Mostrar el mapa de calor
