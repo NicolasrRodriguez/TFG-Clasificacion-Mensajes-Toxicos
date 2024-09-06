@@ -1,0 +1,18 @@
+----------------
+{'batch_size': 256, 'epochs': 50, 'learning_rate': 0.001}
+Test' Score: 0.77421875 ScoreMedia : 0.7751953125 Std: 0.013165859020588058
+----------------
+{'batch_size': 128, 'epochs': 60, 'learning_rate': 0.001}
+Test' Score: 0.7859375 ScoreMedia : 0.7763671875 Std: 0.00712288380031659
+----------------
+{'batch_size': 64, 'epochs': 60, 'learning_rate': 0.001}
+Test' Score: 0.7765625 ScoreMedia : 0.7806640625 Std: 0.01398361118724121
+----------------
+{'batch_size': 128, 'epochs': 60, 'learning_rate': 0.001}
+Test' Score: 0.76171875 ScoreMedia : 0.780859375 Std: 0.012392728186886958
+----------------
+{'batch_size': 32, 'epochs': 50, 'learning_rate': 0.001}
+Test' Score: 0.78515625 ScoreMedia : 0.7701171875 Std: 0.018087245160609725
+----------------
+Exactitud media en test': 0.77671875 Desviacion tipica: 0.00880285376312704 
+----------------

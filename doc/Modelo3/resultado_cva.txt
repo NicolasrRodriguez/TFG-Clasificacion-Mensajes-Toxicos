@@ -1,0 +1,18 @@
+----------------
+{'C': 0.1, 'gamma': 'scale', 'kernel': 'linear'}
+Test' Score: 0.7765625 ScoreMedia : 0.767578125 Std: 0.010996631453327537
+----------------
+{'C': 10, 'gamma': 'scale', 'kernel': 'rbf'}
+Test' Score: 0.77265625 ScoreMedia : 0.766796875 Std: 0.008341467384399462
+----------------
+{'C': 100, 'gamma': 'scale', 'kernel': 'linear'}
+Test' Score: 0.76640625 ScoreMedia : 0.7755859375 Std: 0.016086922095292187
+----------------
+{'C': 10, 'gamma': 'scale', 'kernel': 'linear'}
+Test' Score: 0.75625 ScoreMedia : 0.7734375 Std: 0.019918044974971814
+----------------
+{'C': 0.1, 'gamma': 'scale', 'kernel': 'linear'}
+Test' Score: 0.76640625 ScoreMedia : 0.7705078125 Std: 0.013460985109463107
+----------------
+Exactitud media en test': 0.7676562499999999 Desviacion tipica: 0.006892732812535271 
+----------------

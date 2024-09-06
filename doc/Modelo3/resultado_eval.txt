@@ -1,0 +1,1 @@
+Exactitud en el conjunto de test: 0.779375
