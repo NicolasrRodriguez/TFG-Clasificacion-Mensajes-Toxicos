@@ -1,1 +1,18 @@
-Exactitud en el conjunto de test: 0.763125
+----------------
+Fold 0
+Exactitud: 0.76 Precision: 0.7653061224489796 Sensibilidad: 0.75
+----------------
+Fold 1
+Exactitud: 0.7575 Precision: 0.7614213197969543 Sensibilidad: 0.75
+----------------
+Fold 2
+Exactitud: 0.75375 Precision: 0.7671052631578947 Sensibilidad: 0.72875
+----------------
+Fold 3
+Exactitud: 0.779375 Precision: 0.7818411097099621 Sensibilidad: 0.775
+----------------
+Fold 4
+Exactitud: 0.7625 Precision: 0.7651515151515151 Sensibilidad: 0.7575
+----------------
+Exactitud media en test': 0.7626250000000001 Desviacion tipica: 0.00886002257333469 
+----------------

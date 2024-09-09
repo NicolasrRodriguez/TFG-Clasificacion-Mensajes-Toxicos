@@ -1,18 +1,16 @@
 ----------------
-{'batch_size': 256, 'epochs': 60, 'learning_rate': 0.01}
-Test' Score: 0.76015625 ScoreMedia : 0.7599609375 Std: 0.01367745421875906
+{'batch_size': 32, 'epochs': 60, 'learning_rate': 0.001}
+Puntuacion Grid Search : 0.7620312499999999 Std: 0.011165043803093654
 ----------------
-{'batch_size': 256, 'epochs': 60, 'learning_rate': 0.01}
-Test' Score: 0.77421875 ScoreMedia : 0.7578125 Std: 0.007069125418302288
+{'batch_size': 32, 'epochs': 60, 'learning_rate': 0.001}
+Puntuacion Grid Search : 0.7626562500000001 Std: 0.008761153605547616
 ----------------
 {'batch_size': 32, 'epochs': 50, 'learning_rate': 0.001}
-Test' Score: 0.765625 ScoreMedia : 0.76015625 Std: 0.012846159103441678
+Puntuacion Grid Search : 0.7625 Std: 0.014422475949017922
+----------------
+{'batch_size': 128, 'epochs': 50, 'learning_rate': 0.01}
+Puntuacion Grid Search : 0.7592187499999999 Std: 0.018979069474687096
 ----------------
 {'batch_size': 256, 'epochs': 50, 'learning_rate': 0.01}
-Test' Score: 0.74296875 ScoreMedia : 0.7630859375 Std: 0.020114342942094517
-----------------
-{'batch_size': 256, 'epochs': 60, 'learning_rate': 0.01}
-Test' Score: 0.7640625 ScoreMedia : 0.75703125 Std: 0.01139527511391783
-----------------
-Exactitud media en test': 0.7614062500000001 Desviacion tipica: 0.010300656077405948 
+Puntuacion Grid Search : 0.75703125 Std: 0.009043622580304838
 ----------------

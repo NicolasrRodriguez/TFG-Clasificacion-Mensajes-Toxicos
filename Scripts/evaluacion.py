@@ -1,10 +1,9 @@
 import tensorflow as tf
 import tensorflow_hub as hub
 import bert_model as bm
-from sklearn.model_selection import GridSearchCV , cross_val_score
 import pandas as pd
-from sklearn.metrics import accuracy_score
-from sklearn.model_selection import StratifiedKFold , train_test_split
+from sklearn.metrics import accuracy_score, precision_score, recall_score
+from sklearn.model_selection import StratifiedKFold 
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
@@ -20,7 +19,7 @@ data_c = data['class']#etiquetas
 
 #----Separación de un conjunto de prueba-------
 
-X_train, X_test, y_train, y_test = train_test_split(data_f, data_c , test_size=0.2, random_state=42)
+cv_externo = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
 
 #---Definicion del modelo---
 
@@ -52,43 +51,66 @@ def build_classifier_model_2(learning_rate=1e-3):
     model.compile(loss=loss, optimizer=opt, metrics=['accuracy'])
     return model
 
+
+
+
 #---Entrenamiento final con los mejores hiperparametros---- 
-# Modelo 1 {'batch_size': 256, 'epochs': 60, 'learning_rate': 0.01}
-# Modelo 2 {'batch_size': 128, 'epochs': 60, 'learning_rate': 0.001}
-# Modelo 3 {'C': 0.1, 'gamma': 'scale', 'kernel': 'linear'}
+# Modelo 1 {'batch_size': 32, 'epochs': 60, 'learning_rate': 0.001}
+# Modelo 2 {'batch_size': 64, 'epochs': 60, 'learning_rate': 0.001}
+# Modelo 3 {'C': 10, 'gamma': 'auto', 'kernel': 'rbf'}
+accuracys = [] #Exactitudes durante el proceso de hiperparametrización
+precisions = []
+recalls = []
+confusion_matrices = [] #Matrices de confusion 
 
-#final_model = build_classifier_model_1(learning_rate=0.01)
-final_model = build_classifier_model_2(learning_rate=0.001)
-#final_model = SVC(C= 10, gamma= 'scale' , kernel= 'rbf')
+for index ,(train_idx, test_idx) in enumerate(cv_externo.split(data_f, data_c)):
+   X_train, X_test = data_f.iloc[train_idx], data_f.iloc[test_idx]
+   y_train, y_test = data_c.iloc[train_idx], data_c.iloc[test_idx]
 
-final_model.fit(X_train, y_train, epochs=60, batch_size=128)
+   #final_model = build_classifier_model_1(learning_rate=0.001)
+   #final_model = build_classifier_model_2(learning_rate=0.001)
+   final_model = SVC(C= 10, gamma= 'auto' , kernel= 'rbf')
+   
+   #final_model.fit(X_train, y_train, epochs=60, batch_size=32)
+   #final_model.fit(X_train, y_train, epochs=60, batch_size=64)
+   final_model.fit(X_train, y_train)
 
-#final_model.fit(X_train, y_train)
+   out_predicts = final_model.predict(X_test)
 
-#joblib.dump(final_model, "model3.pkl")
+   binary_predictions = (out_predicts >= 0.5).astype(int)
 
-final_model.save_weights('model2_weights.h5')
+   acc = accuracy_score(y_pred= binary_predictions, y_true= y_test)
 
+   prec = precision_score(y_pred= binary_predictions, y_true= y_test)
 
+   rec = recall_score(y_pred= binary_predictions, y_true= y_test)
 
-#--Evaluación--
+   conf_mat = confusion_matrix(y_pred= binary_predictions, y_true = y_test)
 
-predictions = final_model.predict(X_test)
+   confusion_matrices.append(conf_mat)
 
-predictions = (predictions >= 0.5).astype(int)
+   accuracys.append(acc)
 
+   precisions.append(prec)
+   
+   recalls.append(rec)
 
-acuracy = accuracy_score( y_pred = predictions, y_true= y_test)
-
-conf_mat = confusion_matrix(y_pred= predictions, y_true = y_test)
-
+for index ,mat in enumerate(confusion_matrices):
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(mat, annot=True, fmt="d", cmap="Blues", cbar=False,annot_kws={"size": 18})
+    plt.xlabel('Predicción')
+    plt.ylabel('Real')
+    plt.title(f'Matríz de confusión fold {index}')
+ 
+  
 with open('resultado_eval.txt', 'w') as file:
-    file.write(f"Exactitud en el conjunto de test: {acuracy}")
+   file.write("----------------\n")
+   for index, acc in enumerate(accuracys):
+    file.write(f"Fold {index}\n")
+    file.write(f"Exactitud: {accuracys[index]} Precision: {precisions[index]} Sensibilidad: {recalls[index]}\n")
+    file.write("----------------\n")
 
-plt.figure(figsize=(10, 8))
-sns.heatmap(conf_mat, annot=True, fmt="d", cmap="Blues", cbar=False,annot_kws={"size": 18} ,xticklabels=['Negativos', 'Positivos'], 
-            yticklabels=['Negativos', 'Positivos'],)
-plt.xlabel('Predicción', fontsize=19)
-plt.ylabel('Real', fontsize=19)
-plt.title(f'Matríz de confusión de Test: Modelo 2', fontsize=20)
+   file.write(f"Exactitud media en test': {np.mean(accuracys)} Desviacion tipica: {np.std(accuracys)} \n")
+   file.write("----------------\n")
+
 plt.show()  
