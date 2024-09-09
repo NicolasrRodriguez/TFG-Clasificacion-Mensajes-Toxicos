@@ -1,15 +1,13 @@
 import tensorflow as tf
-import tensorflow_hub as hub
-import bert_model as bm
 import pandas as pd
 from sklearn.metrics import accuracy_score, precision_score, recall_score
-from sklearn.model_selection import StratifiedKFold 
+from sklearn.model_selection import  KFold 
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 import seaborn as sns
 from sklearn.svm import SVC
-import joblib
+
 
 
 #----Datos---
@@ -19,7 +17,7 @@ data_c = data['class']#etiquetas
 
 #----Separación de un conjunto de prueba-------
 
-cv_externo = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+cv_externo = KFold(n_splits=5, shuffle=True, random_state=42)
 
 #---Definicion del modelo---
 
@@ -55,7 +53,7 @@ def build_classifier_model_2(learning_rate=1e-3):
 
 
 #---Entrenamiento final con los mejores hiperparametros---- 
-# Modelo 1 {'batch_size': 32, 'epochs': 60, 'learning_rate': 0.001}
+# Modelo 1 {'batch_size': 32, 'epochs': 50, 'learning_rate': 0.01}
 # Modelo 2 {'batch_size': 64, 'epochs': 60, 'learning_rate': 0.001}
 # Modelo 3 {'C': 10, 'gamma': 'auto', 'kernel': 'rbf'}
 accuracys = [] #Exactitudes durante el proceso de hiperparametrización
@@ -67,11 +65,11 @@ for index ,(train_idx, test_idx) in enumerate(cv_externo.split(data_f, data_c)):
    X_train, X_test = data_f.iloc[train_idx], data_f.iloc[test_idx]
    y_train, y_test = data_c.iloc[train_idx], data_c.iloc[test_idx]
 
-   #final_model = build_classifier_model_1(learning_rate=0.001)
+   #final_model = build_classifier_model_1(learning_rate=0.01)
    #final_model = build_classifier_model_2(learning_rate=0.001)
    final_model = SVC(C= 10, gamma= 'auto' , kernel= 'rbf')
    
-   #final_model.fit(X_train, y_train, epochs=60, batch_size=32)
+   #final_model.fit(X_train, y_train, epochs=50, batch_size=32)
    #final_model.fit(X_train, y_train, epochs=60, batch_size=64)
    final_model.fit(X_train, y_train)
 
@@ -97,7 +95,9 @@ for index ,(train_idx, test_idx) in enumerate(cv_externo.split(data_f, data_c)):
 
 for index ,mat in enumerate(confusion_matrices):
     plt.figure(figsize=(10, 8))
-    sns.heatmap(mat, annot=True, fmt="d", cmap="Blues", cbar=False,annot_kws={"size": 18})
+    sns.heatmap(mat, annot=True, fmt="d", cmap="Blues", cbar=False,annot_kws={"size": 18},         
+                xticklabels=['Negativo', 'Positivo'], 
+                yticklabels=['Negativo', 'Positivo'])
     plt.xlabel('Predicción')
     plt.ylabel('Real')
     plt.title(f'Matríz de confusión fold {index}')

@@ -1,18 +1,18 @@
 ----------------
 Fold 0
-Exactitud: 0.74625 Precision: 0.7164835164835165 Sensibilidad: 0.815
+Exactitud: 0.780625 Precision: 0.7651966626936829 Sensibilidad: 0.8065326633165829
 ----------------
 Fold 1
-Exactitud: 0.776875 Precision: 0.7965194109772423 Sensibilidad: 0.74375
+Exactitud: 0.79 Precision: 0.7851941747572816 Sensibilidad: 0.8027295285359801
 ----------------
 Fold 2
-Exactitud: 0.78 Precision: 0.7939632545931758 Sensibilidad: 0.75625
+Exactitud: 0.77875 Precision: 0.8015978695073236 Sensibilidad: 0.7459727385377943
 ----------------
 Fold 3
-Exactitud: 0.790625 Precision: 0.7939317319848294 Sensibilidad: 0.785
+Exactitud: 0.78 Precision: 0.7817460317460317 Sensibilidad: 0.7596401028277635
 ----------------
 Fold 4
-Exactitud: 0.770625 Precision: 0.7586618876941458 Sensibilidad: 0.79375
+Exactitud: 0.775625 Precision: 0.7544843049327354 Sensibilidad: 0.8277982779827798
 ----------------
-Exactitud media en test': 0.7728749999999999 Desviacion tipica: 0.014803926843915453 
+Exactitud media en test': 0.781 Desviacion tipica: 0.004818583816849101 
 ----------------

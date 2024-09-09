@@ -1,16 +1,16 @@
 ----------------
-{'batch_size': 32, 'epochs': 50, 'learning_rate': 0.001}
-Puntuacion Grid Search : 0.7771874999999999 Std: 0.010716517624676408
-----------------
-{'batch_size': 32, 'epochs': 50, 'learning_rate': 0.001}
-Puntuacion Grid Search : 0.7823437500000001 Std: 0.012149379485183567
-----------------
-{'batch_size': 32, 'epochs': 50, 'learning_rate': 0.001}
-Puntuacion Grid Search : 0.7796875 Std: 0.009720206884372364
-----------------
-{'batch_size': 256, 'epochs': 50, 'learning_rate': 0.001}
-Puntuacion Grid Search : 0.7803125 Std: 0.014484973356033477
-----------------
 {'batch_size': 64, 'epochs': 60, 'learning_rate': 0.001}
-Puntuacion Grid Search : 0.7834375 Std: 0.014161112575465254
+Puntuacion Grid Search : 0.78140625 Std: 0.007401699551454366
+----------------
+{'batch_size': 128, 'epochs': 60, 'learning_rate': 0.001}
+Puntuacion Grid Search : 0.775625 Std: 0.01104191234003424
+----------------
+{'batch_size': 256, 'epochs': 60, 'learning_rate': 0.001}
+Puntuacion Grid Search : 0.7826562499999999 Std: 0.014238482187368154
+----------------
+{'batch_size': 32, 'epochs': 60, 'learning_rate': 0.001}
+Puntuacion Grid Search : 0.78203125 Std: 0.011169416250413462
+----------------
+{'batch_size': 256, 'epochs': 60, 'learning_rate': 0.001}
+Puntuacion Grid Search : 0.77734375 Std: 0.010757446548786567
 ----------------

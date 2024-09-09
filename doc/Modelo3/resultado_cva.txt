@@ -1,18 +1,16 @@
 ----------------
 {'C': 0.1, 'gamma': 'scale', 'kernel': 'linear'}
-Test' Score: 0.7765625 ScoreMedia : 0.767578125 Std: 0.010996631453327537
-----------------
-{'C': 10, 'gamma': 'scale', 'kernel': 'rbf'}
-Test' Score: 0.77265625 ScoreMedia : 0.766796875 Std: 0.008341467384399462
+Puntuacion Grid Search : 0.770625 Std: 0.010145426925467459
 ----------------
 {'C': 100, 'gamma': 'scale', 'kernel': 'linear'}
-Test' Score: 0.76640625 ScoreMedia : 0.7755859375 Std: 0.016086922095292187
+Puntuacion Grid Search : 0.7689062499999999 Std: 0.013996372297849204
 ----------------
-{'C': 10, 'gamma': 'scale', 'kernel': 'linear'}
-Test' Score: 0.75625 ScoreMedia : 0.7734375 Std: 0.019918044974971814
+{'C': 10, 'gamma': 'auto', 'kernel': 'rbf'}
+Puntuacion Grid Search : 0.783125 Std: 0.012088944458677935
 ----------------
-{'C': 0.1, 'gamma': 'scale', 'kernel': 'linear'}
-Test' Score: 0.76640625 ScoreMedia : 0.7705078125 Std: 0.013460985109463107
+{'C': 10, 'gamma': 'auto', 'kernel': 'rbf'}
+Puntuacion Grid Search : 0.7790625 Std: 0.004876402041977272
 ----------------
-Exactitud media en test': 0.7676562499999999 Desviacion tipica: 0.006892732812535271 
+{'C': 1, 'gamma': 'scale', 'kernel': 'linear'}
+Puntuacion Grid Search : 0.7731250000000001 Std: 0.011688502630790656
 ----------------
