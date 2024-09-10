@@ -1,3 +1,0 @@
-Y ya para aclarar bien lo de cross validation tendria que tener 5 conjtunos de entrenamiento_validación y test, y por cada uno de ellos 5 mas de entrenamiento y validación.
-
-Y para entrenar, entreno y escojo el que mejor accuracy en validación tenga de los cinco y, despúes lo evaluo con el test del fold externo.

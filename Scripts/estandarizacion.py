@@ -1,17 +1,5 @@
-import os
-import shutil
-
-import tensorflow as tf
-import tensorflow_hub as hub
-import tensorflow_text as text
-
 import pandas as pd
-import numpy as np
-
-#from official.nlp import optimization #addons da un warning
-
-import matplotlib.pyplot as plt
-import bert_model as bm
+from sklearn.preprocessing import StandardScaler
 
 
 dataframe = pd.read_csv('Data/pooled_outputs.csv')
@@ -22,7 +10,7 @@ dataframe_ = dataframe.drop(columns=['class'])
 print(dataframe_.describe())
 
 
-from sklearn.preprocessing import StandardScaler
+
 
 scaler = StandardScaler()
 standardized_data = scaler.fit_transform(dataframe_)

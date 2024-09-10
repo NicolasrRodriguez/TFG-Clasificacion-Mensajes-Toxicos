@@ -137,37 +137,6 @@ with open('palabras_clave.txt', 'w') as archivo:
     archivo.write("Palabras clave para en mensajes positivos:\n")
     archivo.write(str(palabras_clave_clase2))
 
-"""
-
-frecuencias_por_clase = {}
-
-clases = dataframe['cls'].unique()
-
-for clase in clases:
-    textos_clase = dataframe[dataframe['cls'] == clase]['text']
-    todas_palabras = []
-    for texto in textos_clase:
-        todas_palabras.extend(preparar_mensajes(texto))
-    frecuencias_por_clase[clase] = cnt(todas_palabras)
-
-
-palabras_clave_por_clase = {}
-
-for clase, frecuencias in frecuencias_por_clase.items():
-    otras_clases = [c for c in clases if c != clase]
-    palabras_clave_por_clase[clase] = {}
-    for palabra, frecuencia in frecuencias.items():
-        #otras_frecuencias = sum(frecuencias_por_clase[otra_clase][palabra] for otra_clase in otras_clases)
-        if frecuencia > 5 * longitud_media_palabras:
-            palabras_clave_por_clase[clase][palabra] = frecuencia
-
-with open('palabras_clave.txt', 'w') as archivo:
-    for clase, palabras_clave in palabras_clave_por_clase.items():
-        archivo.write("Palabras clave para la clase " + str(clase) + ":\n")
-        archivo.write(str(sorted(palabras_clave.items(), key=itemgetter(1), reverse=True)) + "\n")
-        archivo.write("\n")
-"""
-
 #----------------------Nulos---------------------
 
 plt.figure(figsize=(10,6))
@@ -179,8 +148,6 @@ if(not dataframe.isnull().values.any()):
 else:
     print("hay nulos")
 
-
-#plt.show()
 
 #-----------------Correlaciones 2 a 2-----------------
 
@@ -211,11 +178,3 @@ sns.heatmap(correlation_matrix_filtered, mask=mask, annot=True, cmap='coolwarm',
 
 # Mostrar el mapa de calor
 plt.show()
-
-"""
-correlations_with_target = datapack.corr()['class'].drop('class')
-
-# Mostrar las correlaciones
-print("Correlaciones con la característica respuesta (class):")
-print(correlations_with_target)
-"""

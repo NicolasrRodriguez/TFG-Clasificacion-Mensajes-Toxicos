@@ -2,7 +2,6 @@ import tensorflow as tf
 from sklearn.model_selection import GridSearchCV 
 import pandas as pd
 from sklearn.model_selection import KFold 
-import numpy as np
 from sklearn.svm import SVC
 
 

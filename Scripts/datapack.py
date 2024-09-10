@@ -1,16 +1,11 @@
-import os
-import shutil
-
 import tensorflow as tf
 import tensorflow_hub as hub
 import tensorflow_text as text
 
 import pandas as pd
-import numpy as np
 
 #from official.nlp import optimization #addons da un warning
 
-import matplotlib.pyplot as plt
 import bert_model as bm
 
 print("TensorFlow version:", tf.__version__)
@@ -44,9 +39,6 @@ print(f'Sequence Outputs Values:{bert_results["sequence_output"][0, :12]}')
 
 pooled_outputs = bert_results['pooled_output'].numpy()
 sequence_outputs = bert_results['sequence_output'].numpy()
-
-#np.save('pooled_outputs.npy', pooled_outputs)
-#np.save('sequence_outputs.npy', sequence_outputs)
 
 pooled_outputs_df = pd.DataFrame(pooled_outputs)
 pooled_outputs_df['class'] = dataframe['cls'].values
