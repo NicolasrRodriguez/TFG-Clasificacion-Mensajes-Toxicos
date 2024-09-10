@@ -1,6 +1,6 @@
 # TFG-Clasificación-Mensajes-Tóxicos
 
-El auge de los eSports ha contribuido al aumento de los jugadores en videojuegos como “Counter-Strike”, “Valorant” o “League of Legends”. Si bien esto es algo positivo, al juntar a personas de diferentes regiones como si de una red social se tratase, también arrastra consigo una nube de toxicidad que, por el bien de estas mismas comunidades, debe de ser controlada.
+El auge de los eSports ha contribuido al aumento de los jugadores en videojuegos como “Counter-Strike”, “Valorant” o “League of Legends”. Si bien esto es algo positivo, al juntar a personas de diferentes regiones como si de una red social se tratase, también arrastra consigo una nube de toxicidad que, por el bien de estas mismas comunidades, debe ser controlada.
 
 En este trabajo se aborda este problema combinando el potencial que ofrece BERT, uno de los principales modelos de procesamiento del lenguaje natural, junto al uso de algoritmos de aprendizaje supervisado.
 
